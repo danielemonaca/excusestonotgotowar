@@ -1,4 +1,5 @@
-  import { Configuration, OpenAIApi } from "openai";
+import { Configuration, OpenAIApi } from "openai";
+import rateLimit from '../../utils/rate-limit'
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -6,16 +7,29 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export default async function (req, res) {
+
   const completion = await openai.createCompletion({
     model: "text-davinci-002",
     prompt: generatePrompt(),
-    temperature: 0.8,
+    temperature: 1,
     max_tokens: 300,
   });
 
+  
+  const limiter = rateLimit({
+    interval: 60 * 1000, // 60 seconds
+    uniqueTokenPerInterval: 500, // Max 500 users per second
+  })
+
   const excuse = completion.data.choices[0].text
 
-  res.status(200).json({ result: excuse });
+  try {
+    await limiter.check(res, 10, 'CACHE_TOKEN') // 10 requests per minute
+    res.status(200).json({ result: excuse });
+  } catch {
+    res.status(429).json({ error: 'Rate limit exceeded' })
+  }
+
 }
 
 

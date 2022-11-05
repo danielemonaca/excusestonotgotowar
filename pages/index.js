@@ -1,13 +1,14 @@
 import Head from "next/head";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import styles from "./index.module.css";
-import {saveExcuseToFirebase} from "../firebase";
+import { saveExcuseToFirebase } from "../firebase";
 
 
 export default function Home() {
     const [result, setResult] = useState();
 
     async function fetchExcuse() {
+        setResult(null);
         const response = await fetch("/api/generate", {
             method: "GET",
             headers: {
@@ -33,12 +34,15 @@ export default function Home() {
             {result ? (
                 <main className={styles.main}>
                     <h3>I can't go to war <b>because {result}</b></h3>
-                </main>
-            ) : (
+
+                    <button className={styles.button} onClick={fetchExcuse}>Generate new excuse</button>
+                </main>) : (
                 <main className={styles.main}>
                     <h3>Finding an excuse...</h3>
                 </main>
+
             )}
+
         </div>
     );
 }

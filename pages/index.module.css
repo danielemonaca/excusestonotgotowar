@@ -25,6 +25,7 @@
   flex-direction: column;
   align-items: center;
   padding-top: 60px;
+  text-align:center;
 }
 .main .icon {
   width: 34px;
@@ -54,4 +55,35 @@
 .main .result {
   font-weight: bold;
   margin-top: 40px;
+  text-align: center;
+}
+
+.button {
+  background-color: rgb(71, 71, 71);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+}
+
+.button:hover {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
 }
