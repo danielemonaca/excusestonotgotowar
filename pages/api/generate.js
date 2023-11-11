@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: "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",
 });
 
 
@@ -9,7 +9,7 @@ export default async function (req, res) {
 
   // Create a completion request to the OpenAI API
   const response = await openai.chat.completions.create({
-    model: "gpt-4-1106-preview",
+    model: "gpt-4",
     messages: [
       {
         "role": "system",
@@ -21,7 +21,7 @@ export default async function (req, res) {
       },
       {
         "role": "assistant",
-        "content": "i can't go to war because my pet fish is learning to whistle and i'm its only tutor."
+        "content": "I can't go to war because my pet fish is learning to whistle and i'm its only tutor."
       }
       ,
       {
@@ -32,8 +32,6 @@ export default async function (req, res) {
     temperature: 1.59,
     max_tokens: 810,
     top_p: 1,
-    frequency_penalty: 1.21,
-    presence_penalty: 1.18,
   });
 
   // Extract the response from the completion

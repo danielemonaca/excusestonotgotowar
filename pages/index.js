@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import styles from "./index.module.css";
-import { saveExcuseToFirebase } from "../firebase";
+import { saveExcuseToFirebase, countExcusesInFirebase } from "../firebase";
 
 
 export default function Home() {
@@ -34,7 +34,7 @@ export default function Home() {
             </Head>
             {result ? (
                 <main className={styles.main}>
-                    <h3>I can't go to war <b>because {result}</b></h3>
+                    <h3><b>{result}</b></h3>
 
                     <button className={styles.button} onClick={fetchExcuse}>Generate new excuse</button>
                 </main>) : (
