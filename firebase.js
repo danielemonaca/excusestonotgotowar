@@ -1,5 +1,5 @@
-import {initializeApp} from "firebase/app";
-import {getDatabase, push, ref} from "firebase/database";
+import { initializeApp } from "firebase/app";
+import { getDatabase, push, ref } from "firebase/database";
 const firebaseConfig = {
     apiKey: "AIzaSyAS4jb2H3tLjY6FUv2Ic8J-udWgGYj43MA",
     authDomain: "excusesnottogotowar.firebaseapp.com",
@@ -16,9 +16,9 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 export function saveExcuseToFirebase(excuse) {
-    const excusesRef = ref(db, "excuses");
+    const excusesRef = ref(db, "excuses-gpt4");
     // get current time
     const time = new Date().getTime();
 
-    push(excusesRef, {excuse, time});
+    push(excusesRef, { excuse, time });
 }

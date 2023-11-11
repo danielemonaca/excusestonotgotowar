@@ -16,8 +16,9 @@ export default function Home() {
             },
         });
         const data = await response.json();
-        saveExcuseToFirebase(data.result);
-        setResult(data.result);
+        console.log(data.result.message.content);
+        saveExcuseToFirebase(data.result.message.content);
+        setResult(data.result.message.content);
     }
 
     useEffect(() => {

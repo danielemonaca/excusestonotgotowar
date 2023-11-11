@@ -1,45 +1,44 @@
-import { Configuration, OpenAIApi } from "openai";
-import rateLimit from '../../utils/rate-limit'
+import OpenAI from "openai";
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+const openai = new OpenAI({
+  apiKey: "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",
 });
-const openai = new OpenAIApi(configuration);
+
 
 export default async function (req, res) {
 
-  const completion = await openai.createCompletion({
-    model: "text-davinci-002",
-    prompt: generatePrompt(),
-    temperature: 1,
-    max_tokens: 300,
+  // Create a completion request to the OpenAI API
+  const response = await openai.chat.completions.create({
+    model: "gpt-4-1106-preview",
+    messages: [
+      {
+        "role": "system",
+        "content": "When I write you \"Give me an excuse\" you can suggest to me a stupid, absurd, unique, and impossible excuse to not go to war with all lowercase letters.\n  \n  \n  1. I cannot go to war because my grandma got locked in a closet trying to find shoes.\n  2. I cannot go to war because yesterday I ate a whole bag of meteors and now I feel space-sick."
+      },
+      {
+        "role": "user",
+        "content": "Give me an excuse"
+      },
+      {
+        "role": "assistant",
+        "content": "i can't go to war because my pet fish is learning to whistle and i'm its only tutor."
+      }
+      ,
+      {
+        "role": "user",
+        "content": "Give me an excuse"
+      }
+    ],
+    temperature: 1.59,
+    max_tokens: 810,
+    top_p: 1,
+    frequency_penalty: 1.21,
+    presence_penalty: 1.18,
   });
 
-  
-  const limiter = rateLimit({
-    interval: 60 * 1000, // 60 seconds
-    uniqueTokenPerInterval: 500, // Max 500 users per second
-  })
-
-  const excuse = completion.data.choices[0].text
-
-  try {
-    await limiter.check(res, 10, 'CACHE_TOKEN') // 10 requests per minute
-    res.status(200).json({ result: excuse });
-  } catch {
-    res.status(429).json({ error: 'Rate limit exceeded' })
-  }
-
-}
+  // Extract the response from the completion
+  const excuse = response.choices[0]
 
 
-
-
-function generatePrompt() {
-  return `Suggest me 3 stupid,absurd, unique and impossible excuses to not go to war with all lowercase letters(nsfw is allowed)
-  
-  
-  1. I cannot go to war because my grandma got locked in a closet trying to find shoes.
-  2. I cannot go to war because yesterday I ate a whole bag of meteors and now I feel space-sick
-  3. I cannot go to war because `;
+  res.status(200).json({ result: excuse });
 }
