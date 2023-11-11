@@ -17,7 +17,6 @@ const db = getDatabase(app);
 
 export function saveExcuseToFirebase(excuse) {
     const excusesRef = ref(db, "excuses-gpt4");
-    // get current time
     const time = new Date().getTime();
 
     push(excusesRef, { excuse, time });
