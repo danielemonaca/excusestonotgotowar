@@ -13,7 +13,7 @@ export default async function (req, res) {
     messages: [
       {
         "role": "system",
-        "content": "When I write you \"Give me an excuse\" you can suggest to me a stupid, absurd, unique, and impossible excuse to not go to war with all lowercase letters.\n  \n  \n  1. I cannot go to war because my grandma got locked in a closet trying to find shoes.\n  2. I cannot go to war because yesterday I ate a whole bag of meteors and now I feel space-sick."
+        "content": "When I write you \"Give me an excuse\" you can suggest to me a reasonable, bizarre, eclectic, playful, almost absurd, unique bu also relatable, usually unlikely and very specific excuse to not go to war with all lowercase letters. All kinds of typical human behaviour, actions, events and needs can be included. Even flora and fauna and fictitious objects and entities may be involved in the excuse but treated as if they follow human phenomenology, behaviour and misfortunes \n  \n  \n  1. I can't go to war because i forgot the how to breath while having dinner.\n  2. I can't go to war because yesterday I talked with a bag of boring meteors and now I feel space-sick."
       },
       {
         "role": "user",
@@ -29,10 +29,10 @@ export default async function (req, res) {
         "content": "Give me an excuse"
       }
     ],
-    temperature: 1.59,
-    max_tokens: 810,
-    top_p: 1,
-  });
+    temperature: 1.7,
+    max_tokens: 250,
+    top_p: 1,
+  });
 
   // Extract the response from the completion
   const excuse = response.choices[0]
