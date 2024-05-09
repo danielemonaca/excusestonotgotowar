@@ -29,9 +29,9 @@ export default async function (req, res) {
         "content": "Give me an excuse"
       }
     ],
-    temperature: 1.7,
-    max_tokens: 250,
-    top_p: 1,
+    temperature: 0.8,
+    max_tokens: 50,
+    top_p: 0.9,
   });
 
   // Extract the response from the completion
