@@ -9,7 +9,7 @@ export default async function (req, res) {
 
   // Create a completion request to the OpenAI API
   const response = await openai.chat.completions.create({
-    model: "gpt-4",
+    model: "gpt-4o",
     messages: [
       {
         "role": "system",
