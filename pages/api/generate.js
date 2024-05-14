@@ -31,7 +31,7 @@ export default async function (req, res) {
     ],
     temperature: 0.8,
     max_tokens: 50,
-    top_p: 0.9,
+    top_p: 0.85,
   });
 
   // Extract the response from the completion
