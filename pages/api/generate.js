@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { getLastTenExcuses } from "../../firebase"; // adjust the path if needed
-import { getWeightedRandomPrompt, prompts } from "../../pages/prompts"; // import the weighted random prompt function
+import { getWeightedRandomPrompt, prompts } from "../../prompts"; // import the weighted random prompt function
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
